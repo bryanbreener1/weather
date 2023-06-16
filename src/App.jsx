@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import getApiKey from './utils/getApiKey'
 import axios from 'axios';
+import WeatherCard from './components/WeatherCard';
+import Loading from './components/Loading';
 
 
 function App() {
@@ -29,31 +31,23 @@ function App() {
       axios.get(url)
         .then(res => {
           setWeather(res.data)
-          setTemp(res.data.main.temp)
+          setTemp({
+            celsius: (res.data.main.temp -273.15).toFixed(1),
+            farenheit: ((res.data.main.temp -273.15) * 9/5 +32).toFixed(1),
+          })
         })
         .catch((err)=> console.log(err))
     }
   },[coords])
 
-  console.log(weather);
   return (
-    <article>
-      <h1>Weather App</h1>
-      <h2>{weather?.name}, {weather?.sys.country}</h2>
-      <section>
-        <img src={weather ? `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png` : ''} alt="va un icono" />
-        <div className='wrapper'>
-          <h3>"{weather?.weather[0].description}"</h3>
-          <ul>
-            <li><span>Wind Speed</span><span>{weather?.wind.speed}</span></li>
-            <li><span>Clouds</span><span>{weather?.clouds.all}</span></li>
-            <li><span>Pressure</span><span>{weather?.main.pressure}</span></li>
-          </ul>
-        </div>
-      </section>
-      <aside>{temp}</aside>
-      <button>Change to °C</button>
-    </article>
+    <div className='app'>
+      {weather
+      ? <WeatherCard weather={weather} temp={temp}/>
+      : <Loading/>
+
+      }
+    </div>
   )
 }
 
