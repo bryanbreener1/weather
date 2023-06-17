@@ -18,9 +18,9 @@ const WeatherCard = ({ weather, temp }) => {
                 <div className='weather__info'>
                     <h3 className='weather__info-title'>"{weather?.weather[0].description}"</h3>
                     <ul className='weather__list'>
-                        <li className='weather__list-item'><span className='weather__list-lable'>Wind Speed</span><span className='weather__list-vaue'>{weather?.wind.speed} m/s</span></li>
-                        <li className='weather__list-item'><span className='weather__list-lable'>Clouds</span><span className='weather__list-vaue'>{weather?.clouds.all} %</span></li>
-                        <li className='weather__list-item'><span className='weather__list-lable'>Pressure</span><span className='weather__list-vaue'>{weather?.main.pressure} hPa</span></li>
+                        <li className='weather__list-item'><span className='weather__list-lable'>Wind Speed</span><span className='weather__list-value'>{weather?.wind.speed} m/s</span></li>
+                        <li className='weather__list-item'><span className='weather__list-lable'>Clouds</span><span className='weather__list-value'>{weather?.clouds.all} %</span></li>
+                        <li className='weather__list-item'><span className='weather__list-lable'>Pressure</span><span className='weather__list-value'>{weather?.main.pressure} hPa</span></li>
                     </ul>
                 </div>
             </section>
